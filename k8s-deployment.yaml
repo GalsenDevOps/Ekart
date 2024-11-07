@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ekart-deployment
+  labels:
+    app: ekart
+spec:
+  replicas: 3  # Number of pod replicas
+  selector:
+    matchLabels:
+      app: ekart
+  template:
+    metadata:
+      labels:
+        app: ekart
+    spec:
+      containers:
+      - name: ekart-container
+        image: gasendevops/ekart:latest  # Replace with your image
+        ports:
+        - containerPort: 8070  # Container port (adjust if different)
+        env:
+        - name: ENVIRONMENT_VARIABLE_NAME  # Example environment variable
+          value: "value"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
